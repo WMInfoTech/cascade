@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Server port="8005" shutdown="SHUTDOWN">
+
+  <Listener SSLEngine="on" className="org.apache.catalina.core.AprLifecycleListener"/>
+  <Listener className="org.apache.catalina.core.JasperListener"/>
+  <Listener className="org.apache.catalina.core.JreMemoryLeakPreventionListener"/>
+  <Listener className="org.apache.catalina.mbeans.ServerLifecycleListener"/>
+  <Listener className="org.apache.catalina.mbeans.GlobalResourcesLifecycleListener"/>
+
+  <GlobalNamingResources>
+    <Resource auth="Container" description="User database that can be updated and saved" factory="org.apache.catalina.users.MemoryUserDatabaseFactory" name="UserDatabase" pathname="conf/tomcat-users.xml" type="org.apache.catalina.UserDatabase"/>
+
+    <Environment name="cascadeSchemaName" type="java.lang.String" value=""/>
+  </GlobalNamingResources>
+
+  <Service name="Catalina">
+  
+    <Connector port="80" maxHttpHeaderSize="8192"
+               maxThreads="256" minSpareThreads="25" maxSpareThreads="75"
+               enableLookups="false" redirectPort="443" acceptCount="100"
+               connectionTimeout="20000" disableUploadTimeout="true" />
+
+    <Connector port="443" protocol="HTTP/1.1" SSLEnabled="true"
+               maxThreads="150" scheme="https" secure="true"
+	       keystoreFile="/local/certs/keystore.ImportKey"
+	       keystorePass="importkey"
+	       keyAlias="importkey"
+               clientAuth="false" sslProtocol="TLS" />
+
+    <Connector port="8009"
+	       enableLookups="false" redirectPort="443" protocol="AJP/1.3" maxProcessors="256" />
+
+    <Engine defaultHost="localhost" name="Catalina">
+
+      <Realm className="org.apache.catalina.realm.UserDatabaseRealm" resourceName="UserDatabase"/>
+
+      <Host appBase="webapps" autoDeploy="true" name="localhost" unpackWARs="true" xmlNamespaceAware="false" xmlValidation="false">
+
+        <!-- SingleSignOn valve, share authentication between web applications
+             Documentation at: /docs/config/valve.html -->
+        <!--
+        <Valve className="org.apache.catalina.authenticator.SingleSignOn" />
+        -->
+
+        <!-- Access log processes all example.
+             Documentation at: /docs/config/valve.html -->
+        <!--
+        <Valve className="org.apache.catalina.valves.AccessLogValve" directory="logs"  
+               prefix="localhost_access_log." suffix=".txt" pattern="common" resolveHosts="false"/>
+        -->
+
+      </Host>
+    </Engine>
+  </Service>
+</Server>

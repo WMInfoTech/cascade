@@ -1,0 +1,10 @@
+name          'crpeck-cascade'
+version       '0.1.0'
+source        'github'
+author        'crpeck'
+license       'Apache 2.0'
+summary       'Manage Hannon Hill Cascade'
+description   'Manage Hannon Hill Cascade'
+project_page  ''
+
+dependency 'puppetlabs/stdlib'

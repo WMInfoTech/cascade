@@ -1,0 +1,116 @@
+<ehcache>
+	<cache 
+		name="newMenuCache" 
+		maxElementsInMemory="1" 
+		eternal="true" 
+		overflowToDisk="true"
+		timeToIdleSeconds="0"
+		timeToLiveSeconds="0" 
+		diskPersistent="false"
+		maxElementsOnDisk="10000" 
+		/>
+	
+	<cache 
+		name="indexBlockRenderPropertiesCache" 
+		maxElementsInMemory="4" 
+		eternal="true" 
+		overflowToOffHeap="false"
+		overflowToDisk="false" 
+		diskPersistent="false"
+		/>
+
+	<cache 
+		name="indexBlockRenderCache" 
+		maxBytesLocalHeap="100m"
+		eternal="true" 
+		overflowToOffHeap="false"
+		overflowToDisk="true" 
+		diskPersistent="false"
+		maxBytesLocalDisk="2G"
+		/>
+</ehcache>
+
+<!--
+	If Cascade Server is deployed across multiple nodes, the caches need to be synchronized across these nodes.
+	To do so, please comment out the configuration above and uncomment the one below in each node that needs to be synchronized. 
+	This will enable cache synchronization that uses multicast. The synchronization will be done across the local area network.
+ 
+	If multicast is disabled by the router, a manual peer discovery can be configured. The url and port of each 
+	node must start with // and nodes must be divided by |. Current node must not be listed. An example of 
+	manual peer discovery connecting to 2 other nodes is provided below. 
+	
+	With manual peer discovery, if one of the nodes is brought down, a significant slowdown may occur at times 
+	when cache is being cleared. If a node is brought down on purpose and manual peer discovery is being used, 
+	it is recommended to update the configuration of all other nodes and restarting them.
+	
+	If port 40001 is blocked, it can be modified here as well. Then, <cacheManagerPeerListenerFactory> tag
+	will need to be updated with the same port. Here is an example configuration for manual peer discovery.
+	
+	<cacheManagerPeerProviderFactory
+		class="net.sf.ehcache.distribution.RMICacheManagerPeerProviderFactory"
+		properties="peerDiscovery=manual, rmiUrls=//192.168.0.189:40001/newMenuCache|//192.168.0.189:40001/indexBlockRenderPropertiesCache|//192.168.0.189:40001/indexBlockRenderCache|//192.168.0.195:40001/newMenuCache|//192.168.0.195:40001/indexBlockRenderPropertiesCache|//192.168.0.195:40001/indexBlockRenderCache"/>
+		
+	The commented xml below is a complete configuration that uses multicast.  
+-->
+<!-- 
+<ehcache>
+	<cacheManagerPeerProviderFactory
+		class="net.sf.ehcache.distribution.RMICacheManagerPeerProviderFactory"
+		properties="peerDiscovery=automatic, multicastGroupAddress=230.0.0.1,
+		multicastGroupPort=4446, timeToLive=32"/>
+
+
+
+	<cacheManagerPeerListenerFactory
+		class="net.sf.ehcache.distribution.RMICacheManagerPeerListenerFactory"
+		properties="port=40001, socketTimeoutMillis=3000"/>
+
+		<cache 
+			name="newMenuCache" 
+			maxElementsInMemory="1" 
+			eternal="true" 
+			overflowToDisk="true"
+			timeToIdleSeconds="0"
+			timeToLiveSeconds="0" 
+			diskPersistent="false"
+			maxElementsOnDisk="10000" 
+			>
+			<cacheEventListenerFactory
+				class="net.sf.ehcache.distribution.RMICacheReplicatorFactory"
+				properties="replicateAsynchronously=true, replicatePuts=true, replicateUpdates=true,
+				replicateUpdatesViaCopy=false, replicateRemovals=true "/>
+	
+		</cache>
+		
+		<cache 
+			name="indexBlockRenderPropertiesCache" 
+			maxElementsInMemory="4" 
+			eternal="true" 
+			overflowToOffHeap="false"
+			overflowToDisk="false" 
+			diskPersistent="false"
+			>
+			<cacheEventListenerFactory
+				class="net.sf.ehcache.distribution.RMICacheReplicatorFactory"
+				properties="replicateAsynchronously=true, replicatePuts=true, replicateUpdates=true,
+				replicateUpdatesViaCopy=false, replicateRemovals=true "/>
+	
+		</cache>
+
+		<cache 
+			name="indexBlockRenderCache" 
+			maxBytesLocalHeap="100m"
+			eternal="true" 
+			overflowToOffHeap="false"
+			overflowToDisk="true" 
+			diskPersistent="false"
+			maxBytesLocalDisk="2G"
+			>
+			<cacheEventListenerFactory
+				class="net.sf.ehcache.distribution.RMICacheReplicatorFactory"
+				properties="replicateAsynchronously=true, replicatePuts=true, replicateUpdates=true,
+				replicateUpdatesViaCopy=false, replicateRemovals=true "/>
+	
+		</cache>
+</ehcache>
+ -->

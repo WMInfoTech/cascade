@@ -1,0 +1,22 @@
+<Context path="">
+	<WatchedResource>WEB-INF/web.xml</WatchedResource>
+	<Manager pathname=""/>
+	<Resource 
+		name                   = "jdbc/CascadeDS" 
+		auth                   = "Container" 
+		type                   = "javax.sql.DataSource" 
+		username               = "<%= @db_user -%>" 
+		password               = "<%= @db_password -%>"
+		driverClassName        = "com.mysql.jdbc.Driver" 
+		url                    = "<%= @db_url -%>"
+		maxActive              = "<%= @db_maxactive -%>" 
+		maxIdle                = "<%= @db_maxidle -%>" 
+		maxWait                = "<%= @db_maxwait -%>"
+		removeAbandoned        = "<%= @db_removeabandoned -%>"
+		removeAbandonedTimeout = "<%= @db_removeabandonedtimeout -%>"
+		logAbandoned           = "<%= @db_logabandoned -%>"
+		validationQuery        = "<%= @db_validationquery -%>"
+		testOnBorrow           = "<%= @db_testonborrow -%>"
+	/>
+    <ResourceLink name="schemaName" global="cascadeSchemaName" type="java.lang.String"/>
+</Context>
