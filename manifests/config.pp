@@ -9,7 +9,7 @@ class cascade::config {
     owner   => $cascade::cascade_user,
     group   => $cascade::cascade_group,
     mode    => '0644',
-    source  => 'cascade/catalina.policy',
+    source  => 'puppet:///modules/cascade/catalina.policy'),
   }
 
   file { "${cascade::tomcat_confdir}/catalina.properties":
@@ -17,7 +17,7 @@ class cascade::config {
     owner   => $cascade::cascade_user,
     group   => $cascade::cascade_group,
     mode    => '0644',
-    source  => 'cascade/catalina.properties',
+    source  => 'puppet:///modules/cascade/catalina.properties',
   }
 
   file { "${cascade::tomcat_confdir}/ehcache.properties":
@@ -25,7 +25,7 @@ class cascade::config {
     owner   => $cascade::cascade_user,
     group   => $cascade::cascade_group,
     mode    => '0644',
-    source  => 'cascade/ehcache.properties',
+    source  => 'puppet:///modules/cascade/ehcache.properties',
   }
 
   file { "${cascade::tomcat_confdir}/ehcache.xml":
@@ -33,7 +33,7 @@ class cascade::config {
     owner   => $cascade::cascade_user,
     group   => $cascade::cascade_group,
     mode    => '0644',
-    source  => 'cascade/ehcache.xml',
+    source  => 'puppet:///modules/cascade/ehcache.xml',
   }
 
   file { "${cascade::tomcat_confdir}/logging.properties":
@@ -41,7 +41,7 @@ class cascade::config {
     owner   => $cascade::cascade_user,
     group   => $cascade::cascade_group,
     mode    => '0644',
-    source  => 'cascade/logging.properties',
+    source  => 'puppet:///modules/cascade/logging.properties',
   }
 
   file { "${cascade::tomcat_confdir}/server.xml":
@@ -49,7 +49,7 @@ class cascade::config {
     owner   => $cascade::cascade_user,
     group   => $cascade::cascade_group,
     mode    => '0644',
-    source  => 'cascade/server.xml',
+    source  => 'puppet:///modules/cascade/server.xml',
   }
 
   file { "${cascade::tomcat_confdir}/web.xml":
@@ -57,7 +57,7 @@ class cascade::config {
     owner   => $cascade::cascade_user,
     group   => $cascade::cascade_group,
     mode    => '0644',
-    source  => 'cascade/web.xml',
+    source  => 'puppet:///modules/cascade/web.xml',
   }
 
 
