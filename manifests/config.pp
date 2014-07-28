@@ -4,20 +4,20 @@
 #
 class cascade::config {
 
-  file { "${cascade::tomcat_confdir}/cascade.policy":
+  file { "${cascade::tomcat_confdir}/catalina.policy":
     ensure  => present,
     owner   => $cascade::cascade_user,
     group   => $cascade::cascade_group,
     mode    => '0644',
-    source  => 'cascade/cascade.policy',
+    source  => 'cascade/catalina.policy',
   }
 
-  file { "${cascade::tomcat_confdir}/cascade.properties":
+  file { "${cascade::tomcat_confdir}/catalina.properties":
     ensure  => present,
     owner   => $cascade::cascade_user,
     group   => $cascade::cascade_group,
     mode    => '0644',
-    source  => 'cascade/cascade.properties',
+    source  => 'cascade/catalina.properties',
   }
 
   file { "${cascade::tomcat_confdir}/ehcache.properties":
