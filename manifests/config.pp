@@ -9,7 +9,7 @@ class cascade::config {
     owner   => $cascade::cascade_user,
     group   => $cascade::cascade_group,
     mode    => '0644',
-    source  => 'puppet:///modules/cascade/catalina.policy'),
+    source  => 'puppet:///modules/cascade/catalina.policy',
   }
 
   file { "${cascade::tomcat_confdir}/catalina.properties":
