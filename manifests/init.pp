@@ -12,6 +12,8 @@
 #   Explanation of what this parameter affects and what it defaults to.
 #
 class cascade (
+  $cascade_user       = $cascade::params::cascade_user,
+  $cascade_group      = $cascade::params::cascade_group,
   $db_user            = $cascade::params::db_user,
   $db_password        = $cascade::params::db_password,
   $db_url             = $cascade::params::db_url,
