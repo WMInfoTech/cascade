@@ -63,7 +63,7 @@ class cascade::config {
 
   file { "${cascade::tomcat_confdir}/context.xml":
     ensure  => file,
-    mode    => '0644',
+    mode    => '0640',
     owner   => 'root',
     group   => $tomcat7::tomcat_group,
     content => template('cascade/context.xml.erb'),

@@ -13,8 +13,7 @@
 
 ##Overview
 
-A one-maybe-two sentence summary of what the module does/what problem it solves. This is your 30 second elevator pitch for your module. Consider including OS/Puppet version it works with.       
-
+Manages config file for Hannon Hills Cascade
 ##Module Description
 
 If applicable, this section should have a brief description of the technology the module integrates with and what that integration enables. This section should answer the questions: "What does this module *do*?" and "Why would I use it?"
@@ -31,7 +30,7 @@ If your module has a range of functionality (installation, configuration, manage
 
 ###Setup Requirements **OPTIONAL**
 
-If your module requires anything extra before setting up (pluginsync enabled, etc.), mention it here. 
+Requires Tomcat be installed.
 
 ###Beginning with cascade
 
@@ -45,16 +44,31 @@ Put the classes, types, and resources for customizing, configuring, and doing th
 
 ##Reference
 
-Here, list the classes, types, providers, facts, etc contained in your module. This section should include all of the under-the-hood workings of your module so people know what the module is touching on their system but don't need to mess with things. (We are working on automating this section!)
+All files in the files area are copied to tomcat's conf directory
+The only file actively managed is the context.xml, which contains these
+parameters.
+
+=== Parameters
+
+cascade_user = user than owns the files installed, defaults to tomcat7 on ubuntu, tomcat on rhel
+cascade_group = group that owns the files installed, ditto above defaults
+db_user - userid to connect to MySQL db with - no default
+db_password - password used to connect to MySQL with - no default
+db_url - url to find MySQL with - no default
+db_maxactive - defined in context.xml, deault = 50
+db_maxidle - context.xml, default = 10
+db_maxwait - context.xml, default = 3000
+db_removeabandoned - context.xml, default = true
+db_logabandoned - context.xml, default = true
+db_validationquery - context.xml, default = SELECT 11
+db_testonborrow - context.xml, default = true
+tomcat_confdir - location of tomcat confiiguration dir, ubuntu=/etc/tomcat7, rhel = /etc/tomcat
+
 
 ##Limitations
 
-This is where you list OS compatibility, version compatibility, etc.
+Should work on Ubuntu and RHEL base distributions
 
 ##Development
 
-Since your module is awesome, other users will want to play with it. Let them know what the ground rules for contributing are.
-
-##Release Notes/Contributors/Etc **Optional**
-
-If you aren't using changelog, put your release notes here (though you should consider using changelog). You may also add any additional sections you feel are necessary or important to include here. Please use the `## ` header. 
+Fork it, submit pull request with spec tests.
