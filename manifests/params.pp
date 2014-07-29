@@ -21,6 +21,6 @@ class cascade::params {
     $cascade_group            = 'tomcat'
     $tomcat_confdir           = '/etc/tomcat6'
   }  else {
-    fail('Your operating system isn\'t supported by this tomcat module.')
+    fail('Your operating system isn\'t supported by this cascade module.')
   }
 }
